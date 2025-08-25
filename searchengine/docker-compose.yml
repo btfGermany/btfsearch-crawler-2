@@ -1,0 +1,80 @@
+version: '3.8'
+
+services:
+  searchengine:
+    build: .
+    container_name: searchengine
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+      - ./exports:/app/exports
+      - ./logs:/app/logs
+    environment:
+      - DATABASE_PATH=/app/data/search.db
+      - FAISS_INDEX_PATH=/app/data/faiss.index
+      - ALLOWLIST_PATH=/app/config/allowlist.txt
+      - BLOCKLIST_PATH=/app/config/blocklist.txt
+      - EXPORT_PATH=/app/exports
+      - REDIS_URL=redis://redis:6379/0
+      - REDIS_ENABLED=true
+    env_file:
+      - .env
+    depends_on:
+      - redis
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - searchnet
+
+  redis:
+    image: redis:7-alpine
+    container_name: searchengine-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - searchnet
+
+  crawler:
+    build: .
+    container_name: searchengine-crawler
+    command: python scripts/cli.py crawl --continuous
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+      - ./logs:/app/logs
+      - ./seeds.txt:/app/seeds.txt
+    environment:
+      - DATABASE_PATH=/app/data/search.db
+      - ALLOWLIST_PATH=/app/config/allowlist.txt
+      - BLOCKLIST_PATH=/app/config/blocklist.txt
+    env_file:
+      - .env
+    depends_on:
+      - searchengine
+    restart: unless-stopped
+    networks:
+      - searchnet
+
+volumes:
+  redis-data:
+    driver: local
+
+networks:
+  searchnet:
+    driver: bridge

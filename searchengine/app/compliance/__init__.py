@@ -1,0 +1,1 @@
+"""Compliance module for legal requirements."""
