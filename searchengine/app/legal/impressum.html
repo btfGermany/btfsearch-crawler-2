@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        h2 { color: #34495e; margin-top: 30px; }
+        .contact-info { background: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0; }
+        .legal-section { margin: 25px 0; }
+    </style>
+</head>
+<body>
+    <h1>Impressum</h1>
+    
+    <div class="legal-section">
+        <h2>Angaben gemäß § 5 TMG</h2>
+        <div class="contact-info">
+            <p><strong>{{OPERATOR_NAME}}</strong><br>
+            {{OPERATOR_ADDRESS}}</p>
+        </div>
+    </div>
+    
+    <div class="legal-section">
+        <h2>Kontakt</h2>
+        <div class="contact-info">
+            <p>E-Mail: <a href="mailto:{{OPERATOR_EMAIL}}">{{OPERATOR_EMAIL}}</a></p>
+        </div>
+    </div>
+    
+    <div class="legal-section">
+        <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+        <div class="contact-info">
+            <p>{{OPERATOR_NAME}}<br>
+            {{OPERATOR_ADDRESS}}</p>
+        </div>
+    </div>
+    
+    <div class="legal-section">
+        <h2>Hinweise zur Website</h2>
+        <h3>Urheberrechtliche Hinweise</h3>
+        <p>Diese Suchmaschine indexiert öffentlich zugängliche Inhalte des World Wide Web. 
+        Die indexierten Inhalte unterliegen dem Urheberrecht der jeweiligen Rechteinhaber. 
+        Es werden nur kurze Textausschnitte (Snippets) und Metadaten gespeichert.</p>
+        
+        <h3>Haftungsausschluss</h3>
+        <p>Die Inhalte dieser Suchmaschine wurden mit größtmöglicher Sorgfalt erstellt. 
+        Für die Richtigkeit, Vollständigkeit und Aktualität der Suchergebnisse können wir 
+        jedoch keine Gewähr übernehmen.</p>
+        
+        <h3>Haftung für Links</h3>
+        <p>Diese Suchmaschine enthält Links zu externen Websites Dritter, auf deren Inhalte 
+        wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine 
+        Gewähr übernehmen.</p>
+    </div>
+    
+    <div class="legal-section">
+        <h2>Crawler-Informationen</h2>
+        <p>Unser Webcrawler respektiert die robots.txt-Datei und crawlt nur öffentlich 
+        zugängliche Inhalte. Der User-Agent lautet: <code>SearchEngineBot/1.0</code></p>
+        <p>Falls Sie nicht möchten, dass Ihre Website indexiert wird, können Sie dies über 
+        Ihre robots.txt-Datei steuern oder uns unter 
+        <a href="mailto:{{OPERATOR_EMAIL}}">{{OPERATOR_EMAIL}}</a> kontaktieren.</p>
+    </div>
+    
+    <div class="legal-section">
+        <h2>Meldung rechtswidriger Inhalte</h2>
+        <p>Sollten Sie rechtswidrige Inhalte in unseren Suchergebnissen entdecken, 
+        nutzen Sie bitte unser <a href="/report">Meldeformular</a> oder kontaktieren Sie uns 
+        direkt unter <a href="mailto:{{OPERATOR_EMAIL}}">{{OPERATOR_EMAIL}}</a>.</p>
+    </div>
+</body>
+</html>
